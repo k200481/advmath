@@ -24,10 +24,13 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "CoordinateTransformer.h"
+#include "World.h"
 #include "Entity.h"
 #include "Star.h"
 #include "Camera.h"
 #include "MouseCameraController.h"
+
+#include <random>
 
 class Game
 {
@@ -50,6 +53,9 @@ private:
 	CoordinateTransformer ct;
 	Camera cam;
 	MouseCameraController camCtrl;
-	std::vector<Entity> entities;
+	
+	std::mt19937 rng;
+	World world;
+
 	/********************************/
 };
