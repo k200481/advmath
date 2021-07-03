@@ -159,6 +159,7 @@
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="Star.h" />
+    <ClInclude Include="StarAnimations.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="_Rect.h" />

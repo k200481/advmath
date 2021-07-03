@@ -19,7 +19,7 @@ public:
 	}
 	_Rect(const Vec2& topLeft, float width, float height) 
 		:
-		_Rect(topLeft.x, topLeft.x + width, topLeft.y, topLeft.y + height)
+		_Rect(topLeft.x, topLeft.x + width, topLeft.y, topLeft.y - height)
 	{
 	}
 	_Rect(const Vec2& topLeft, const Vec2& bottomRight)
@@ -31,7 +31,7 @@ public:
 	static _Rect GetRectFromCenter( const Vec2& center, float width, float height ) {
 		const float halfWidth = width / 2;
 		const float halfHeight = height / 2;
-		return _Rect(center - Vec2(halfWidth, halfHeight), width, height);
+		return _Rect(center - Vec2(halfWidth, -halfHeight), width, height);
 	}
 
 	// check if two _Rects overlap, when true, it's a collision
@@ -43,7 +43,7 @@ public:
 	// check if a given point is inside the rect
 	bool ContainsPoint(const Vec2& p) {
 		return p.x >= left && p.x <= right
-			&& p.y >= top && p.y <= bottom;
+			&& p.y >= bottom && p.y <= top;
 	}
 
 	// check if one reck is fully inside another rect, when false, rect has collided with the 'walls'

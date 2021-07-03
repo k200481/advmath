@@ -28,7 +28,7 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	ct( gfx ),
-	cam( ct ),
+	cam( ct, Graphics::ScreenWidth, Graphics::ScreenHeight ),
 	camCtrl( wnd.mouse,cam ),
 	rng( std::random_device()() ),
 	world( 10000.0f, 5000.0f, 150, rng )
@@ -45,7 +45,9 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const float dt = 1 / 60.0f;
 	camCtrl.Update();
+	world.Update( dt );
 }
 
 void Game::ComposeFrame()

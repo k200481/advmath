@@ -25,7 +25,7 @@ public:
 	}
 	bool IsVertical() const
 	{
-		return pt1.y == pt2.y;
+		return pt1.x == pt2.x;
 	}
 
 	bool Intersects(const LineSegment& other) const

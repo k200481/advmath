@@ -4,6 +4,8 @@
 #include "Vec2.h"
 #include "Drawable.h"
 
+#include <functional>
+
 class Entity
 {
 public:
@@ -50,9 +52,20 @@ public:
 		}
 		return std::move( modelCpy );
 	}
+
+	void SetEffect( std::function<void(Color&, float&, float)> newEffect )
+	{
+		effect = newEffect;
+	}
+	void Update( float dt )
+	{
+		effect( c, scale, dt );
+	}
+	
 private:
 	Color c;
 	float scale = 1.0f;
 	Vec2 pos = {0.0f,0.0f};
 	std::vector<Vec2> model;
+	std::function<void(Color&, float&, float)> effect;
 };
