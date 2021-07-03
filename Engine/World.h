@@ -11,6 +11,8 @@
 #include "Camera.h"
 #include "MouseCameraController.h"
 
+#include "LinearAlgebra.h"
+
 class World
 {
 public:

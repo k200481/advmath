@@ -21,6 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 #include "Star.h"
+#include "LinearAlgebra.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -30,7 +31,7 @@ Game::Game( MainWindow& wnd )
 	cam( ct ),
 	camCtrl( wnd.mouse,cam ),
 	rng( std::random_device()() ),
-	world( 1000, 1000, 10, rng )
+	world( 10000.0f, 5000.0f, 150, rng )
 {
 }
 

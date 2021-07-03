@@ -40,6 +40,16 @@ public:
 		d.Translate( pos );
 		return d;
 	}
+	std::vector<Vec2> GetModel() const
+	{
+		std::vector<Vec2> modelCpy = model;
+		for (auto& m : modelCpy)
+		{
+			m *= scale;
+			m += pos;
+		}
+		return std::move( modelCpy );
+	}
 private:
 	Color c;
 	float scale = 1.0f;
