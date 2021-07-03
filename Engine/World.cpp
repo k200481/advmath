@@ -9,8 +9,8 @@ World::World(float width, float height, int nEntities, std::mt19937& rng)
 	height( height )
 {
 	const std::uniform_int_distribution<int> nFlaresDist( 2, 10 );
-	const std::uniform_real_distribution<float> innerRadDist( 50, 100 );
-	const std::uniform_real_distribution<float> outerRadDist( 100, 150 );
+	const std::uniform_real_distribution<float> innerRadDist( 50, 200 );
+	const std::uniform_real_distribution<float> outerRadDist( 150, 300 );
 
 	for ( int i = 0; i < nEntities; ) 
 	{
