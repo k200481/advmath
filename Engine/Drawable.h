@@ -31,42 +31,25 @@ public:
 	}
 	void Render( Graphics& gfx )
 	{
-		/*auto modelCpy = model;
-		for (auto& v : modelCpy)
-		{
+		auto tform = [this]( Vec2& v ) {
 			v.x *= scale_x;
 			v.y *= scale_y;
 			v += translation;
-		}
-		gfx.DrawClosedPolyline(modelCpy, c);*/
+		};
+
+		Vec2 front = *model.begin();
+		tform( front );
+		auto cur = front;
 
 		for (auto i = model.begin(); i != std::prev(model.end()); i++)
 		{
-			auto v = *i;
-			auto vNext = *std::next(i);
+			auto next = *std::next(i);
+			tform( next );
 
-			v.x *= scale_x;
-			v.y *= scale_y;
-			v += translation;
-
-			vNext.x *= scale_x;
-			vNext.y *= scale_y;
-			vNext += translation;
-
-			gfx.DrawLine( v, vNext, c );
+			gfx.DrawLine( cur, next, c );
+			cur = next;
 		}
-		auto v = *std::prev(model.end());
-		auto vNext = *model.begin();
-
-		v.x *= scale_x;
-		v.y *= scale_y;
-		v += translation;
-
-		vNext.x *= scale_x;
-		vNext.y *= scale_y;
-		vNext += translation;
-
-		gfx.DrawLine(v, vNext, c);
+		gfx.DrawLine(cur, front, c);
 	}
 private:
 	Color c;
