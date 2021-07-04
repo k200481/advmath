@@ -1,15 +1,18 @@
 #pragma once
 
 #include "Entity.h"
+#include "Star.h"
 #include "StarAnimations.h"
 #include <random>
 
 class StarEntity : public Entity
 {
 public:
-	StarEntity( std::vector<Vec2> model, const Vec2& pos = { 0.0f, 0.0f }, Color c = Colors::Yellow )
+	StarEntity( float outerRadius, float innerRadius, int nFlares, const Vec2& pos = { 0.0f, 0.0f }, Color c = Colors::Yellow )
 		:
-		Entity( model, pos, c )
+		Entity( Star::Make( outerRadius, innerRadius, nFlares ), pos, c ),
+		innerRadius( innerRadius ),
+		outerRadius( outerRadius )
 	{
 	}
 
@@ -24,6 +27,22 @@ public:
 			m += pos;
 		}
 		return std::move(model);
+	}
+	float GetOuterRadius() const
+	{
+		return outerRadius * GetScale();
+	}
+	float GetMaxOuterRadius() const
+	{
+		return outerRadius * maxScale;
+	}
+	float GetInnerRadius() const
+	{
+		return innerRadius * GetScale();
+	}
+	float GetMaxInnerRadius() const
+	{
+		return innerRadius * maxScale;
 	}
 
 	void SetAnimationEffect(std::function<void(Color&, float&, float)> newEffect)
@@ -41,7 +60,7 @@ public:
 
 		const std::vector<std::function<void( Color&, float&, float )>> effects =
 		{
-			StarAnimations::Scale( periodDist(rng) ),
+//			StarAnimations::Scale( periodDist(rng) ),
 			StarAnimations::ColorEffect( baseColor, targetColor, periodDist(rng) ),
 			StarAnimations::ScaleAndColor( baseColor, targetColor, periodDist(rng) )
 		};
@@ -68,5 +87,7 @@ private:
 
 private:
 	std::function<void(Color&, float&, float)> effect;
+	const float outerRadius;
+	const float innerRadius;
 };
 

@@ -20,6 +20,8 @@
 ******************************************************************************************/
 #pragma once
 
+#include "ChiliMath.h"
+
 template <typename T>
 class _Vec2
 {
@@ -42,7 +44,7 @@ public:
 	}
 	T		LenSq() const
 	{
-		return sq( *this );
+		return sq( x ) + sq( y );
 	}
 	T		Len() const
 	{

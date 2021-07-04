@@ -17,20 +17,19 @@ World::World( int nEntities, std::mt19937& rng )
 		
 		const std::uniform_real_distribution<float> xDist( (-width / 2) - 1 + outerRadius, (+width / 2) - 1 - outerRadius );
 		const std::uniform_real_distribution<float> yDist( (-height / 2) - 1 + outerRadius, (+height / 2) - 1 - outerRadius );
-		
-		const std::uniform_real_distribution<float> periodDist( 0.1f, 5.0f );
-		const std::uniform_int_distribution<int> colorDist( 0, 255 );
 
 		Vec2 pos;
 		pos.x = xDist( rng );
 		pos.y = yDist( rng );
 
-		StarEntity newEntity( Star::Make(outerRadius, innerRadius, nFlares), pos );
+		StarEntity newEntity( outerRadius, innerRadius, nFlares, pos );
 		newEntity.GiveRandomAnimationEffect( rng );
 
 		if (std::any_of( entities.begin(), entities.end(),
 				[&](const StarEntity& e) {
-					return PolyLinesIntersect(e.GetMaxModel(), newEntity.GetMaxModel());
+				bool isInside = ( e.GetPos() - newEntity.GetPos() ).Len() <= 
+						( e.GetMaxInnerRadius() + newEntity.GetMaxInnerRadius() );
+					return isInside || PolyLinesIntersect(e.GetMaxModel(), newEntity.GetMaxModel());
 				}
 			)
 		)
