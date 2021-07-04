@@ -16,18 +16,19 @@
 class World
 {
 public:
-	World( int nEntities, std::mt19937& rng );
+	World( std::mt19937& rng );
 	void Update( float dt );
 	void Render( Camera& cam );
 
 private:
 	static constexpr float width = 10000.0f;
 	static constexpr float height = 6000.0f;
+	static constexpr int nStars = 100;
 
-	static constexpr float maxStarOuterRadius = 300.0f;
+	static constexpr float maxStarOuterRadius = 200.0f;
 	static constexpr float minStarOuterRadius = 150.0f;
 	
-	static constexpr float maxStarInnerRadius = 200.0f;
+	static constexpr float maxStarInnerRadius = 150.0f;
 	static constexpr float minStarInnerRadius = 50.0f;
 
 	static constexpr int nMaxFlares = 10;

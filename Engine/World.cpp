@@ -3,13 +3,13 @@
 #include "LinearAlgebra.h"
 #include "StarAnimations.h"
 
-World::World( int nEntities, std::mt19937& rng )
+World::World( std::mt19937& rng )
 {
 	const std::uniform_int_distribution<int> nFlaresDist( nMinFlares, nMaxFlares );
 	const std::uniform_real_distribution<float> innerRadDist( minStarInnerRadius, maxStarInnerRadius );
 	const std::uniform_real_distribution<float> outerRadDist( minStarOuterRadius, maxStarOuterRadius );
 
-	for ( int i = 0; i < nEntities; ) 
+	for ( int i = 0; i < nStars; ) 
 	{
 		const float innerRadius = innerRadDist( rng );
 		const float outerRadius = outerRadDist( rng );
