@@ -31,7 +31,7 @@ Game::Game( MainWindow& wnd )
 	cam( ct, Graphics::ScreenWidth, Graphics::ScreenHeight ),
 	camCtrl( wnd.mouse,cam ),
 	rng( std::random_device()() ),
-	world( 10000.0f, 5000.0f, 150, rng )
+	world( 120, rng )
 {
 }
 

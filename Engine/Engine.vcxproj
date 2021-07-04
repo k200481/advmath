@@ -160,6 +160,7 @@
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="Star.h" />
     <ClInclude Include="StarAnimations.h" />
+    <ClInclude Include="StarEntity.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="_Rect.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="StarEntity.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>

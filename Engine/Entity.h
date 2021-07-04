@@ -35,6 +35,14 @@ public:
 	{
 		return scale;
 	}
+	Color GetColor() const
+	{
+		return c;
+	}
+	void SetColor( Color newColor )
+	{
+		c = newColor;
+	}
 	Drawable GetDrawable() const
 	{
 		Drawable d( model,c );
@@ -42,7 +50,7 @@ public:
 		d.Translate( pos );
 		return d;
 	}
-	std::vector<Vec2> GetModel() const
+	std::vector<Vec2> GetCurrentModel() const
 	{
 		std::vector<Vec2> modelCpy = model;
 		for (auto& m : modelCpy)
@@ -52,14 +60,9 @@ public:
 		}
 		return std::move( modelCpy );
 	}
-
-	void SetEffect( std::function<void(Color&, float&, float)> newEffect )
+	std::vector<Vec2> GetBaseModel() const
 	{
-		effect = newEffect;
-	}
-	void Update( float dt )
-	{
-		effect( c, scale, dt );
+		return model;
 	}
 	
 private:
@@ -67,5 +70,4 @@ private:
 	float scale = 1.0f;
 	Vec2 pos = {0.0f,0.0f};
 	std::vector<Vec2> model;
-	std::function<void(Color&, float&, float)> effect;
 };
