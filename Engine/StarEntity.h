@@ -82,7 +82,7 @@ public:
 	}
 
 private:
-	static constexpr float maxScale = 1.5f;
+	static constexpr float maxScale = 2.0f;
 	static constexpr float minScale = 0.5f;
 
 private:
