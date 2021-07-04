@@ -60,9 +60,9 @@ public:
 
 		const std::vector<std::function<void( Color&, float&, float )>> effects =
 		{
-//			StarAnimations::Scale( periodDist(rng) ),
+			StarAnimations::Scale( minScale, maxScale, periodDist(rng) ),
 			StarAnimations::ColorEffect( baseColor, targetColor, periodDist(rng) ),
-			StarAnimations::ScaleAndColor( baseColor, targetColor, periodDist(rng) )
+			StarAnimations::ScaleAndColor( minScale, maxScale, baseColor, targetColor, periodDist(rng) )
 		};
 
 		const std::uniform_int_distribution<int> effectDist( 0, (int) effects.size() - 1 );

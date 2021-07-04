@@ -9,8 +9,10 @@ namespace StarAnimations
 	class Scale 
 	{
 	public:
-		Scale( float period )
+		Scale( float minScale = 0.5f, float maxScale = 1.5f, float period = 1.0f )
 			:
+			minScale( minScale ),
+			maxScale( maxScale ),
 			period( period )
 		{
 		}
@@ -25,17 +27,17 @@ namespace StarAnimations
 		}
 
 	private:
+		const float minScale;
+		const float maxScale;
+		const float period;
+		
 		float seconds = 0.0f;
-		const float period = 1.0f;
-
-		const float minScale = 0.5f;
-		const float maxScale = 1.5f;
 	};
 
 	class ColorEffect
 	{
 	public:
-		ColorEffect( Color baseColor, Color destinationColor = Colors::White, float period = 1.0f )
+		ColorEffect( Color baseColor = Colors::Yellow, Color destinationColor = Colors::White, float period = 1.0f )
 			:
 			baseColor( baseColor ),
 			destinationColor( destinationColor ),
@@ -66,9 +68,9 @@ namespace StarAnimations
 	class ScaleAndColor : public Scale, public ColorEffect
 	{
 	public:
-		ScaleAndColor(Color baseColor, Color destinationColor, float period)
+		ScaleAndColor( float minScale = 0.5f, float maxScale = 1.5f, Color baseColor = Colors::Yellow, Color destinationColor = Colors::White, float period = 1.0f )
 			:
-			Scale( period ),
+			Scale( minScale, maxScale, period ),
 			ColorEffect( baseColor, destinationColor, period )
 		{
 		}
