@@ -20,11 +20,15 @@
 ******************************************************************************************/
 #pragma once
 
+#include <cmath>
+
 template <typename T>
 class _Vec2
 {
 public:
 	_Vec2()
+		:
+		x(), y()
 	{}
 	_Vec2( T x,T y )
 		:
@@ -64,6 +68,17 @@ public:
 	T		operator*( const _Vec2& rhs ) const
 	{
 		return x * rhs.x + y * rhs.y;
+	}
+	_Vec2&	Rotate( float angle )
+	{
+		const auto opp = sin( angle );
+		const auto adj = cos( angle );
+
+		const T new_x = T( y * opp - x * adj );
+		y = T( x * opp + y * adj );
+		x = new_x;
+
+		return *this;
 	}
 	_Vec2	operator-() const
 	{

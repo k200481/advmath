@@ -50,12 +50,19 @@ void Game::UpdateModel()
 	for( auto& ball : balls )
 	{
 		const auto plankPts = plank.GetPoints();
-		if( DistancePointLine( plankPts.first,plankPts.second,ball.GetPos() ) < ball.GetRadius() )
+		const Vec2 v = ball.GetVel();
+		const Vec2 ballPos = ball.GetPos();
+
+		if ( DistancePointLine(plankPts.first, plankPts.second, ballPos) < ball.GetRadius() )
 		{
-			const Vec2 w = plank.GetPlankSurfaceVector().GetNormalized();
-			const Vec2 v = ball.GetVel();
-			ball.SetVel( w * (v * w) * 2.0f - v );
-			collideSound.Play();
+			const Vec2 plankNormal = plank.GetPlankSurfaceVector().Rotate( -PI / 2 );
+			
+			if ( plankNormal * v < 0 ) 
+			{
+				const Vec2 w = plank.GetPlankSurfaceVector().GetNormalized();
+				ball.SetVel(w * (v * w) * 2.0f - v);
+				collideSound.Play();
+			}
 		}
 
 		ball.Update( dt );
